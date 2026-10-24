@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naimish Infotech Pvt. Ltd. | IT Solutions & Training</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af', // Deep blue main
+                            900: '#1e3a8a', // Darker blue
+                            950: '#172554',
+                        },
+                        dark: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 58, 138, 0.85)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Arbitrary large height */
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 bg-gray-50 antialiased selection:bg-primary-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#home" class="flex items-center gap-3 group">
+                        <img src="logo.png" alt="Naimish Infotech Logo" class="h-12 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
+                        <span style="font-size: 1.5rem;letter-spacing: 0.1em;" class="font-bold text-xl tracking-tight text-primary-900 leading-tight">
+                            NAIMISH<br>
+                            <span style="font-size: 1.5rem;" class="text-xs font-medium text-gray-500 tracking-widest uppercase">Infotech</span>
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">About Us</a>
+                    <a href="#services" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">Services</a>
+                    <a href="#training" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">Training</a>
+                    <a href="#why-us" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">Why Us</a>
+                    <a href="#faq" class="text-gray-600 hover:text-primary-600 font-medium transition-colors text-sm">FAQ</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-md bg-primary-800 text-white font-medium hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg text-sm">Contact Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary-600 focus:outline-none p-2 rounded-md">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-xl absolute w-full left-0">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#home" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">About Us</a>
+                <a href="#services" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">Services</a>
+                <a href="#training" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">Training</a>
+                <a href="#why-us" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">Why Us</a>
+                <a href="#faq" class="mobile-link block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors">FAQ</a>
+                <a href="#contact" class="mobile-link block px-3 py-3 text-base font-bold text-primary-700 bg-primary-50 rounded-md mt-4 text-center border border-primary-100">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <!-- Decorative subtle grid -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
+                    <span class="text-primary-100 font-semibold tracking-wider uppercase text-xs">Established in 2013</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+                    Building Technology.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-blue-200">Enabling Businesses.</span><br>
+                    Developing Talent.
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
+                    From software and web development to digital marketing, SEO and technology training, we bring creativity and practical expertise together to support digital growth.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#services" class="px-8 py-4 rounded-md bg-primary-600 text-white font-medium hover:bg-primary-500 transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] text-lg flex items-center justify-center gap-2">
+                        Explore Our Services <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 rounded-md bg-white/5 text-white font-medium hover:bg-white/15 border border-white/20 transition-all backdrop-blur-sm text-lg flex items-center justify-center">
+                        Talk to Our Team
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white/50 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <!-- Image composite -->
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Naimish Infotech Team" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-primary-50 rounded-2xl -z-10"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 border-4 border-primary-100 rounded-2xl -z-10"></div>
+                    
+                    <div class="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-white p-6 rounded-xl shadow-xl border border-gray-50 z-20 hidden md:block">
+                        <div class="text-4xl font-extrabold text-primary-600 mb-1">10+</div>
+                        <div class="text-sm font-bold text-gray-800 uppercase tracking-wide">Years of<br>Excellence</div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-12 h-1 bg-primary-600 rounded-full"></div>
+                        <h2 class="text-primary-600 font-bold tracking-widest uppercase text-sm">About Naimish Infotech</h2>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">Technology Expertise Built Since 2013</h3>
+                    
+                    <div class="prose prose-lg text-gray-600 mb-8">
+                        <p class="leading-relaxed">
+                            Established in 2013, Naimish Infotech Pvt. Ltd. focuses on providing technology-driven solutions to businesses and organizations.
+                        </p>
+                        <p class="leading-relaxed">
+                            We understand that technology is not simply about software or websites. It is about creating solutions that help organizations operate better, reach their audience and adapt to a rapidly changing digital environment. Our approach combines technical knowledge, practical implementation and an understanding of business requirements.
+                        </p>
+                    </div>
+                    
+                    <h4 class="font-bold text-gray-900 mb-4 text-lg border-b pb-2 border-gray-100">Our Core Areas</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">Software Development</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">Web Development</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">Digital Marketing & SEO</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">Corporate Training</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">IT Training (B.Tech/BCA/MCA)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-primary-500"></i>
+                            <span class="text-gray-700 font-medium">Emerging Tech Programs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-primary-600 font-bold tracking-widest uppercase text-sm mb-2">Our IT & Digital Services</h2>
+                <h3 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Technology That Supports Business Growth</h3>
+                <p class="text-lg text-gray-600">Every organization has different technology requirements. We focus on developing solutions that are <strong class="text-primary-800">Practical</strong>, <strong class="text-primary-800">Scalable</strong>, <strong class="text-primary-800">User-Focused</strong>, and <strong class="text-primary-800">Business-Oriented</strong>.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-primary-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Software Development</h4>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        We develop software solutions around specific business requirements, workflows and operational needs. From application planning to implementation.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Business Applications</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Custom Software</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> API Integration</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-primary-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Web Development</h4>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        We design and develop responsive websites and web applications with attention to functionality, usability, performance and modern web standards.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Business Websites</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Web Applications</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Front/Back-End Dev</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-primary-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">Digital Marketing</h4>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        We help businesses build and strengthen their presence across digital channels through strategy, content, search and online promotion.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Digital Strategy</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Social Media Marketing</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Content Marketing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-primary-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">SEO Services</h4>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+                        Our SEO approach focuses on improving website structure, content relevance, search visibility and overall quality of organic presence.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Keyword Research</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> On-Page & Technical SEO</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-angle-right text-primary-500 mt-1"></i> Local SEO</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section id="training" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-primary-600 font-bold tracking-widest uppercase text-sm mb-2">Training & Development</h2>
+                <h3 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Developing Technology Skills</h3>
+                <p class="text-lg text-gray-600">Turning academic knowledge into practical technology skills, and helping organizations build teams that can adapt to continuous technological changes.</p>
+            </div>
+
+            <!-- Two Main Pillars -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+                <!-- Corporate -->
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-10 border border-gray-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-32 h-32 bg-primary-100 rounded-bl-full -mr-8 -mt-8 opacity-50"></div>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <div class="w-14 h-14 bg-primary-800 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-primary-900/20">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-gray-900">Corporate Training</h4>
+                    </div>
+                    <p class="text-gray-600 mb-8 relative z-10 leading-relaxed">
+                        Technology changes continuously. We provide corporate training programs designed around organizational requirements, employee skill levels, and specific technology environments. Ideal for technical teams and working professionals.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 font-semibold text-primary-700 hover:text-primary-800 transition-colors group">
+                        Discuss Corporate Training 
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Students / Academic -->
+                <div class="bg-gradient-to-br from-primary-900 to-primary-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-32 h-32 bg-primary-700 rounded-bl-full -mr-8 -mt-8 opacity-50"></div>
+                    <i class="fas fa-code absolute -bottom-10 -right-4 text-9xl text-white/5 z-0"></i>
+                    
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <div class="w-14 h-14 bg-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-primary-900/50">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white">IT Training for Students</h4>
+                    </div>
+                    <p class="text-primary-100 mb-8 relative z-10 leading-relaxed">
+                        For B.Tech, BCA, and MCA students. Education doesn't end with a degree. Get practical exposure to modern technologies, hands-on learning, development tools, and project-based workflows used beyond the classroom.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center gap-2 font-semibold text-white hover:text-primary-200 transition-colors group relative z-10">
+                        Partner With Us (Colleges) 
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Training Modules Grid -->
+            <div class="text-center mb-10">
+                <h4 class="text-2xl font-bold text-gray-900">Available Technology Domains</h4>
+                <p class="text-gray-500 mt-2">Specialized programs for classroom, institutional or custom requirements.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">Full Stack Dev</h5>
+                    <p class="text-sm text-gray-500">Front-End interfaces to Back-End web applications.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">React Native</h5>
+                    <p class="text-sm text-gray-500">Cross-platform mobile application development.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">Data Science</h5>
+                    <p class="text-sm text-gray-500">Understand data, discover insights, build analytical skills.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">Cloud Computing</h5>
+                    <p class="text-sm text-gray-500">The technology behind modern digital infrastructure.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">DevOps</h5>
+                    <p class="text-sm text-gray-500">Learn modern software delivery and deployment practices.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">AI & ML</h5>
+                    <p class="text-sm text-gray-500">Explore the technologies behind intelligent applications.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-2xl p-6 hover:border-primary-500 hover:shadow-md transition-all bg-white group text-center">
+                    <div class="w-16 h-16 mx-auto bg-pink-50 text-pink-600 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h5 class="font-bold text-gray-900 mb-2">Digital Marketing</h5>
+                    <p class="text-sm text-gray-500">Learn how businesses grow in the digital environment.</p>
+                </div>
+
+                <!-- Spacer/Action block -->
+                <div class="border border-dashed border-gray-300 rounded-2xl p-6 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <p class="text-sm text-gray-500 mb-3 text-center">Looking for custom institutional programs?</p>
+                    <a href="#contact" class="px-5 py-2 bg-white border border-gray-300 rounded-full text-primary-700 font-semibold text-sm hover:border-primary-500 shadow-sm transition-all">Request Syllabus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us / Approach Section -->
+    <section id="why-us" class="py-24 bg-dark text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Why Us -->
+                <div>
+                    <h2 class="text-primary-400 font-bold tracking-widest uppercase text-sm mb-2">Why Naimish Infotech?</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold mb-10 leading-tight">Experience Across Tech & Digital Domains</h3>
+                    <div class="space-y-8">
+                        <div class="flex gap-5">
+                            <div class="w-12 h-12 rounded-full bg-primary-900/50 flex items-center justify-center flex-shrink-0 border border-primary-800">
+                                <i class="fas fa-bullseye text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-xl mb-2 text-white">Business-Oriented Solutions</h5>
+                                <p class="text-gray-400 leading-relaxed">We focus on understanding the requirement before proposing a technology solution.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="w-12 h-12 rounded-full bg-primary-900/50 flex items-center justify-center flex-shrink-0 border border-primary-800">
+                                <i class="fas fa-layer-group text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-xl mb-2 text-white">Multiple Technology Domains</h5>
+                                <p class="text-gray-400 leading-relaxed">Our expertise spans development, cloud, DevOps, data, AI/ML and digital technologies.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="w-12 h-12 rounded-full bg-primary-900/50 flex items-center justify-center flex-shrink-0 border border-primary-800">
+                                <i class="fas fa-handshake text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-xl mb-2 text-white">Long-Term Perspective</h5>
+                                <p class="text-gray-400 leading-relaxed">We aim to build technology capabilities and relationships that can evolve with changing business needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approach -->
+                <div class="bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-gray-700 shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-2">Our Approach</h3>
+                    <p class="text-primary-400 mb-10 font-medium">Understand. Build. Improve.</p>
+                    
+                    <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-700 before:to-transparent">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-800 bg-primary-500 text-white font-bold text-sm z-10 relative">01</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-700 bg-gray-900/50 shadow">
+                                <h5 class="font-bold text-lg text-white mb-1">Understand</h5>
+                                <p class="text-gray-400 text-sm">We begin by understanding the business, technology or learning requirement.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-800 bg-gray-700 text-gray-300 font-bold text-sm z-10 relative">02</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-700 bg-gray-900/50 shadow">
+                                <h5 class="font-bold text-lg text-white mb-1">Plan</h5>
+                                <p class="text-gray-400 text-sm">Identify the appropriate technology, approach and implementation strategy.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-800 bg-gray-700 text-gray-300 font-bold text-sm z-10 relative">03</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-700 bg-gray-900/50 shadow">
+                                <h5 class="font-bold text-lg text-white mb-1">Build & Implement</h5>
+                                <p class="text-gray-400 text-sm">Develop the solution and deliver with practical application in focus.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-gray-800 bg-gray-700 text-gray-300 font-bold text-sm z-10 relative">04</div>
+                            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-700 bg-gray-900/50 shadow">
+                                <h5 class="font-bold text-lg text-white mb-1">Improve</h5>
+                                <p class="text-gray-400 text-sm">Technology evolves continuously. We believe solutions and skills should evolve with it.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h3 class="text-2xl font-bold text-gray-900">Industries & Requirements We Support</h3>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Businesses & Startups</span>
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Educational Institutions</span>
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Corporate Organizations</span>
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Students & Professionals</span>
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Entrepreneurs</span>
+                <span class="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-700 font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors cursor-default">Digital Businesses</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-primary-600 font-bold tracking-widest uppercase text-sm mb-2">Answers To Your Questions</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h3>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-white border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900">Is Naimish Infotech an IT company or a training institute?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 bg-white">
+                        <p class="pb-5 text-gray-600">Naimish Infotech Pvt. Ltd. is an IT and digital solutions company that also provides professional corporate and IT training programs.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-white border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900">What IT services do you provide?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 bg-white">
+                        <p class="pb-5 text-gray-600">Our key services include custom software development, web development, digital marketing, search engine optimization (SEO), and corporate training.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-white border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900">Do you provide IT training to students?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 bg-white">
+                        <p class="pb-5 text-gray-600">Yes. We provide technology-focused training programs for B.Tech, BCA and MCA students in areas such as Full Stack Development, React Native, Data Science, Cloud Computing, DevOps, AI & ML, and Digital Marketing.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-white border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-900">Can colleges arrange IT training for students?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer px-6 bg-white">
+                        <p class="pb-5 text-gray-600">Yes. We can develop customized technology training programs for colleges and educational institutions based on curriculum needs, student skill levels, and available duration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="py-24 bg-primary-800 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg==')]"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Have a Technology Requirement?</h2>
+            <p class="text-primary-100 text-lg md:text-xl mb-12 max-w-3xl mx-auto font-light">
+                Whether you are looking for a software development partner, web development company, digital marketing and SEO services, corporate technology training or student IT training, our team is ready to discuss your requirement.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button class="px-8 py-4 rounded-lg bg-white text-primary-900 font-bold hover:bg-gray-100 hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-2">
+                    <i class="fas fa-envelope text-primary-600"></i> Request a Consultation
+                </button>
+                <button class="px-8 py-4 rounded-lg bg-transparent border-2 border-white/50 text-white font-bold hover:bg-white/10 hover:border-white transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-graduation-cap"></i> Enquire About Training
+                </button>
+            </div>
+			 <!-- Direct Contact Numbers -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-16 pt-10 border-t border-white/20 max-w-2xl mx-auto text-white">
+                <div class="text-center">
+                    <p class="text-primary-300 text-xs mb-2 uppercase tracking-widest font-semibold">Call Us Directly</p>
+                    <a href="tel:+919044628000" class="text-2xl md:text-3xl font-bold hover:text-primary-200 transition-colors block">+91 90446 28000</a>
+                </div>
+                <div class="hidden md:block w-px h-16 bg-white/20"></div>
+                <div class="text-center">
+                    <p class="text-primary-300 text-xs mb-2 uppercase tracking-widest font-semibold">Alternate Number</p>
+                    <a href="tel:+919451194811" class="text-2xl md:text-3xl font-bold hover:text-primary-200 transition-colors block">+91 94511 94811</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-20 pb-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                <!-- Company Info (Spans 4 cols on large screens) -->
+                <div class="lg:col-span-4 pr-4">
+                    <a href="#home" class="flex items-center gap-3 mb-6">
+                        <img src="logo.png" alt="Naimish Infotech Logo" class="h-12 w-auto object-contain drop-shadow-sm brightness-110">
+                        <span class="font-bold text-xl tracking-tight text-white leading-tight">
+                            NAIMISH<br>
+                            <span class="text-xs font-medium text-gray-400 tracking-widest uppercase">Infotech</span>
+                        </span>
+                    </a>
+                    <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                        Building Technology. Enabling Businesses. Developing Talent. Established in 2013, providing IT solutions, web development, digital marketing, SEO, and professional training.
+                    </p>
+                    <!-- Footer Contact Numbers -->
+                    <div class="mb-8 space-y-3">
+                        <a href="tel:+919044628000" class="flex items-center gap-3 text-gray-300 hover:text-primary-400 transition-colors font-medium">
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-primary-500">
+                                <i class="fas fa-phone-alt text-sm"></i>
+                            </div>
+                            +91 90446 28000
+                        </a>
+                        <a href="tel:+919451194811" class="flex items-center gap-3 text-gray-300 hover:text-primary-400 transition-colors font-medium">
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-primary-500">
+                                <i class="fas fa-phone-alt text-sm"></i>
+                            </div>
+                            +91 94511 94811
+                        </a>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+
+                <!-- Quick Links -->
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-bold mb-6 text-lg tracking-wide">Quick Links</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Home</a></li>
+                        <li><a href="#about" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> About Us</a></li>
+                        <li><a href="#services" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> IT Services</a></li>
+                        <li><a href="#training" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Corporate Training</a></li>
+                        <li><a href="#contact" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-bold mb-6 text-lg tracking-wide">IT Services</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#services" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Software Development</a></li>
+                        <li><a href="#services" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Web Development</a></li>
+                        <li><a href="#services" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Digital Marketing</a></li>
+                        <li><a href="#services" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Search Engine Optimization</a></li>
+                    </ul>
+                </div>
+
+                <!-- Training Programs -->
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-bold mb-6 text-lg tracking-wide">Training Programs</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#training" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Full Stack & React Native</a></li>
+                        <li><a href="#training" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Data Science & AI/ML</a></li>
+                        <li><a href="#training" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Cloud Computing & DevOps</a></li>
+                        <li><a href="#training" class="hover:text-primary-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Digital Marketing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2013 - 2026 Naimish Infotech Pvt. Ltd. All Rights Reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const navbar = document.getElementById('navbar');
+
+            // Mobile menu toggle
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Smooth scroll for anchor links & close mobile menu on click
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if(!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: "smooth"
+                        });
+                    }
+                });
+            });
+
+            // Navbar shadow on scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('py-2');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+        });
+
+        // FAQ Accordion Toggle function
+        function toggleFAQ(button) {
+            const parent = button.parentElement;
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if(item !== parent) {
+                    item.classList.remove('active');
+                }
+            });
+            // Toggle current FAQ
+            parent.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
